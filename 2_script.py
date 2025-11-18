@@ -897,7 +897,7 @@ print(f"  - LAS_VEGAS_2025_QUALIFYING_RAW.csv (for RaceTime prediction)")
 #################################################
 #################################################
 #################################################
-# # Step 2: Build RaceTime predictor
+# # STEP 2: PREDICT THE RACE
 
 # %% 
 # ## 2.1: Prepare training data
@@ -1655,16 +1655,16 @@ else:
 # ## 2.13: Encoding categorical variables for race prediction
 
 # Load the encoders we created during training
-le_driver_race = pickle.load(open('le_driver_race.pkl', 'rb'))
-le_team_race = pickle.load(open('le_team_race.pkl', 'rb'))
-le_event_race = pickle.load(open('le_event_race.pkl', 'rb'))
-le_year_race = pickle.load(open('le_year_race.pkl', 'rb'))
+driver__encoder_race = pickle.load(open('driver_encoder_race.pkl', 'rb'))
+team_encoder_race = pickle.load(open('team_encoder_race.pkl', 'rb'))
+event_encoder_race = pickle.load(open('event_encoder_race.pkl', 'rb'))
+year_encoder_race = pickle.load(open('year_encoder_race.pkl', 'rb'))
 
 # Encode the prediction data
-df_predict_race['Driver_Encoded'] = le_driver_race.transform(df_predict_race['Driver'])
-df_predict_race['Team_Encoded'] = le_team_race.transform(df_predict_race['Team'])
-df_predict_race['Event_Encoded'] = le_event_race.transform(df_predict_race['Event'])
-df_predict_race['Year_Encoded'] = le_year_race.transform(df_predict_race['Year'])
+df_predict_race['Driver_Encoded'] = driver__encoder_race.transform(df_predict_race['Driver'])
+df_predict_race['Team_Encoded'] = team_encoder_race.transform(df_predict_race['Team'])
+df_predict_race['Event_Encoded'] = event_encoder_race.transform(df_predict_race['Event'])
+df_predict_race['Year_Encoded'] = year_encoder_race.transform(df_predict_race['Year'])
 
 print(f"✓ Encoding complete")
 print(f"  Driver encoded")
