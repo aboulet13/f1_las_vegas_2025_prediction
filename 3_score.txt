@@ -13,18 +13,13 @@ Gradient Boosting (with Simplified Regularization) --> overfitting
   Test MAE: 1.0247s
   Test RMSE: 1.9121s
 
-Gradient Boosting (with Aggressive Regularization) --> not overfitting
+Gradient Boosting (with Aggressive Regularization) --> just slightly overfitting
   Training R²: 0.5246
   Test R²: 0.5211
   Training MAE: 6.0550s
   Test MAE: 6.4620s
   Test RMSE: 7.7984s
 
-Ensemble Models (rf and gb)
-  Training R²: 0.9579
-  Test R²: 0.9561
-  Training MAE: 1.2691s
-  Test MAE: 1.3465s
 
 STEP 2: PREDICT THE RACE
 

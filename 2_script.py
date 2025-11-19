@@ -329,48 +329,6 @@ print(f"Test R²: {test_r2_agg:.4f}")
 print(f"\nTraining MAE: {mean_absolute_error(y_train, y_train_pred_agg):.4f}s")
 print(f"Test MAE: {mean_absolute_error(y_test, y_test_pred_agg):.4f}s")
 print(f"Test RMSE: {np.sqrt(mean_squared_error(y_test, y_test_pred_agg)):.4f}s")
-
-# %%
-# Model 3: Ensemble of models
-
-print("\n" + "="*60)
-print("ENSEMBLE APPROACH - COMBINING MULTIPLE MODELS")
-print("="*60 + "\n")
-
-from sklearn.ensemble import VotingRegressor
-
-# Create ensemble of different model types
-ensemble_model = VotingRegressor(
-    estimators=[
-        ('rf', RandomForestRegressor(
-            n_estimators=100, max_depth=5, min_samples_split=20, 
-            min_samples_leaf=10, max_features='sqrt', random_state=42, n_jobs=-1
-        )),
-        ('gb', GradientBoostingRegressor(
-            n_estimators=50, max_depth=3, learning_rate=0.05,
-            min_samples_split=20, min_samples_leaf=10, subsample=0.8,
-            max_features='sqrt', random_state=42
-        ))
-    ],
-    weights=[0.5, 0.5]
-)
-
-print("Training Voting Ensemble...")
-ensemble_model.fit(X_train, y_train)
-
-y_train_pred_ens = ensemble_model.predict(X_train)
-y_test_pred_ens = ensemble_model.predict(X_test)
-
-train_r2_ens = r2_score(y_train, y_train_pred_ens)
-test_r2_ens = r2_score(y_test, y_test_pred_ens)
-gap_ens = train_r2_ens - test_r2_ens
-
-print(f"\n--- Ensemble Performance ---")
-print(f"Training R²: {train_r2_ens:.4f}")
-print(f"Test R²: {test_r2_ens:.4f}")
-
-print(f"\nTraining MAE: {mean_absolute_error(y_train, y_train_pred_ens):.4f}s")
-print(f"Test MAE: {mean_absolute_error(y_test, y_test_pred_ens):.4f}s")
 # %%
 # Save the best model
 """
@@ -381,12 +339,11 @@ print(f"Best model: {model_name}")
 pickle.dump(best_model, open('quali_predictor_model.pkl', 'wb'))
 """
 
-best_model = gb_aggressive # because rf is overfitting
+best_model = gb_aggressive # because rf is actually overfitting
 
 # %% 
 # ### 1.3.3: Feature importance analysis
 
-# %%
 # Check which features are most important
 feature_importance = pd.DataFrame({
     'Feature': final_features,
@@ -396,7 +353,6 @@ feature_importance = pd.DataFrame({
 print("\n=== TOP 15 MOST IMPORTANT FEATURES ===")
 print(feature_importance.head(15))
 
-# %%
 # Visualize
 plt.figure(figsize=(10, 6))
 top_features = feature_importance.head(15)
