@@ -34,7 +34,7 @@ The core of this predictive model is built upon a comprehensive historical datas
 
     - RaceTime: The total elapsed time for a driver to complete the race.
 
-### 3. Initial Model Attempt: Random Forest (Qualifying Time)
+### 3. Initial Model Attempt: Random Forest (first for Qualifying Time, then for Race Time)
 
 The first model established was a Random Forest Regressor, intended as the rapid baseline for predicting Best_Quali_Time.
 
@@ -53,7 +53,7 @@ The first model established was a Random Forest Regressor, intended as the rapid
   - QualiTime Metric (MAE): 0.9996 seconds
   - QualiTime Metric (RMSE): 1.3653 seconds
 
-### 4. First Iteration: Stabilized Gradient Boosting & Race Prediction
+### 4. First Iteration: Stabilized Gradient Boosting & expansion to Race Prediction
 
 This iteration focused on addressing the overfitting issue in the Qualifying model and expanding the scope to the full race prediction.
 
@@ -61,23 +61,23 @@ This iteration focused on addressing the overfitting issue in the Qualifying mod
 
 - Model Switch & Regularization: Switched to GradientBoostingRegressor. A highly aggressive regularization strategy (max_depth=2, learning_rate=0.01, n_estimators=50) was immediately applied to minimize the Train/Test R² gap.
 
-- Impact on Qualifying Metrics: This change stabilized the model, improving generalization and reducing error substantially.
+- Impact on Qualifying Metrics: This change stabilized the model, improving generalization but increasing error substantially.
 
-- New QualiTime MAE: 0.7516 seconds (a 25% reduction in MAE from the Random Forest attempt).
+- New QualiTime MAE: 6.4620 seconds
 
-- New QualiTime RMSE: 1.0664 seconds.
+- New QualiTime RMSE: 7.7984 seconds.
 
-- Qualifying Validation: 5-Fold Cross-Validation confirmed stability with a Mean R² of 0.9003 (+/- 0.0075).
+- Qualifying Validation: 5-Fold Cross-Validation confirmed stability with a Standard Deviation of R² scores of 0.0098 (low variance).
 
-- Scope Expansion: The stable Gradient Boosting model configuration was then used to predict the total race duration (RaceTime).
+- Scope Expansion: The stable Gradient Boosting model configuration was then compared again to Random Forest to predict the total race duration (RaceTime). In the end, Random Forest was the best model in this case.
 
 - Race Prediction Features: The feature set was expanded to include historical Driver/Team RaceTime metrics and, crucially, the predicted QualiTime from the first stage.
 
-- RaceTime Metrics (Test Set): The model achieved near-perfect fit on the race data.
+- RaceTime Metrics (Test Set): The model achieved average results on the race data, with a large margin error (for Formula 1).
 
-  - RaceTime Metric (Test R²): 0.9990
-  - RaceTime Metric (MAE): 66.1950 seconds (Approx. 1 minute, 6 seconds of error)
-  - RaceTime Metric (RMSE): 87.2001 seconds (Approx. 1 minute, 27 seconds of error)
+  - RaceTime Metric (Test R²): 0.6487
+  - RaceTime Metric (MAE): 237.9089 seconds (Approx. 4 minutes of error)
+  - RaceTime Metric (RMSE): 370.5408 seconds (Approx. 6 minutes of error)
  
 ### 5. Conclusion and Constraints
 
