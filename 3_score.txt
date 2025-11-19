@@ -1,0 +1,43 @@
+STEP 1: PREDICT THE QUALIFYING SESSION
+
+Random Forest --> overfitting
+  Training R²: 0.9939
+  Test R²: 0.9830
+  Test MAE: 0.6736 seconds
+  Test RMSE: 1.4697 seconds
+
+Gradient Boosting (with Simplified Regularization) --> overfitting
+  Training R²: 0.9817
+  Test R²: 0.9712
+  Training MAE: 0.8357s
+  Test MAE: 1.0247s
+  Test RMSE: 1.9121s
+
+Gradient Boosting (with Aggressive Regularization) --> not overfitting
+  Training R²: 0.5246
+  Test R²: 0.5211
+  Training MAE: 6.0550s
+  Test MAE: 6.4620s
+  Test RMSE: 7.7984s
+
+Ensemble Models (rf and gb)
+  Training R²: 0.9579
+  Test R²: 0.9561
+  Training MAE: 1.2691s
+  Test MAE: 1.3465s
+
+STEP 2: PREDICT THE RACE
+
+Random Forest (Regularized)
+  Training R²: 0.7524
+  Test R²: 0.6487
+  Overfitting Gap: 0.1037
+  Test MAE: 237.9089s
+  Test RMSE: 370.5408s
+
+Gradient Boosting (with Aggressive Regularization)
+  Training R²: 0.2326
+  Test R²: 0.1946
+  Overfitting Gap: 0.0380
+  Test MAE: 414.6970s
+  Test RMSE: 561.0622s
