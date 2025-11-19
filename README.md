@@ -53,7 +53,7 @@ The first model established was a Random Forest Regressor, intended as the rapid
   - QualiTime Metric (MAE): 0.9996 seconds
   - QualiTime Metric (RMSE): 1.3653 seconds
 
-### 4. First Iteration: Stabilized Gradient Boosting & expansion to Race Prediction
+### 4. Iteration: Stabilized Gradient Boosting & expansion to Race Prediction
 
 This iteration focused on addressing the overfitting issue in the Qualifying model and expanding the scope to the full race prediction.
 
