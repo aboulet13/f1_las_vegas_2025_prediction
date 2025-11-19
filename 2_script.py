@@ -290,86 +290,8 @@ print(f"Test MAE: {mean_absolute_error(y_test, y_test_pred_reg):.4f}s")
 print(f"Test RMSE: {np.sqrt(mean_squared_error(y_test, y_test_pred_reg)):.4f}s")
 
 # %%
-"""
-# Model 2: Gradient Boosting with GridSearchCV
-# GB was still overfitting even after regularization, so we made adjustments in the hyperparameters with GridSearchCV
-# This takes more than 15min to run...
-
-print("Tuning GB to avoid overfitting")
-
-# Define hyperparameter grid (focus on regularization)
-param_grid = {
-    'n_estimators': [50, 100, 150],          # Fewer trees
-    'max_depth': [3, 4, 5, 6],               # Shallower trees
-    'learning_rate': [0.01, 0.05, 0.1],      # Slower learning
-    'min_samples_split': [10, 15, 20],       # Require more samples to split
-    'min_samples_leaf': [5, 10, 15],         # Require more samples in leaves
-    'subsample': [0.7, 0.8, 0.9, 1.0],       # Use subset of training data
-    'max_features': ['sqrt', 'log2', None]   # Use subset of features
-}
-
-# Create base model
-gb_base = GradientBoostingRegressor(random_state=42)
-
-# Grid search with cross-validation
-print("Performing Grid Search (this may take a few minutes)...\n")
-
-grid_search = GridSearchCV(
-    gb_base,
-    param_grid,
-    cv=5,
-    scoring='r2',
-    n_jobs=-1,
-    verbose=1
-)
-
-grid_search.fit(X_train, y_train)
-
-print(f"\n✓ Best parameters found:")
-best_params = grid_search.best_params_
-for param, value in best_params.items():
-    print(f"  {param}: {value}")
-
-print(f"\nBest CV R² Score: {grid_search.best_score_:.4f}")
-
-# Use the best model
-best_model_tuned = grid_search.best_estimator_
-
-# Evaluate
-y_train_pred_tuned = best_model_tuned.predict(X_train)
-y_test_pred_tuned = best_model_tuned.predict(X_test)
-
-print(f"\n--- Performance After Tuning ---")
-print(f"Training R²: {r2_score(y_train, y_train_pred_tuned):.4f}")
-print(f"Test R²: {r2_score(y_test, y_test_pred_tuned):.4f}")
-print(f"Overfitting Gap: {r2_score(y_train, y_train_pred_tuned) - r2_score(y_test, y_test_pred_tuned):.4f}")
-
-print(f"\nTraining MAE: {mean_absolute_error(y_train, y_train_pred_tuned):.4f}s")
-print(f"Test MAE: {mean_absolute_error(y_test, y_test_pred_tuned):.4f}s")
-
-print("Gradient Boosting")
-gb_model = GradientBoostingRegressor(
-    n_estimators=50, # was 100
-    max_depth=3, # was 5
-    learning_rate=0.05, # was 0.1
-    min_samples_split=15, # was 5
-    min_samples_leaf=7, # was 2
-    random_state=42
-)
-
-gb_model.fit(X_train, y_train)
-gb_pred_train = gb_model.predict(X_train)
-gb_pred_test = gb_model.predict(X_test)
-
-print(f"Training R²: {r2_score(y_train, gb_pred_train):.4f}")
-print(f"Test R²: {r2_score(y_test, gb_pred_test):.4f}")
-print(f"Test MAE: {mean_absolute_error(y_test, gb_pred_test):.4f} seconds")
-print(f"Test RMSE: {np.sqrt(mean_squared_error(y_test, gb_pred_test)):.4f} seconds")
-"""
-
-# %%
 # Model 2: Gradient Boosting with agressive regularization
-# GB was still overfitting after GridSearchCV, so we made used very conservative hyperparameters
+# GB was still overfitting after first regularization, so we made used very conservative hyperparameters
 
 print("\n" + "="*60)
 print("AGGRESSIVE REGULARIZATION (ULTRA-CONSERVATIVE)")
