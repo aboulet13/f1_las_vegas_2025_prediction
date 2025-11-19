@@ -81,9 +81,9 @@ This iteration focused on addressing the overfitting issue in the Qualifying mod
  
 ### 5. Conclusion and Constraints
 
-The project successfully developed a stable Gradient Boosting model pipeline for both Qualifying and Race Time prediction, achieving high R² scores and low MAE/RMSE figures across both targets through aggressive regularization.
+The project successfully developed a stable Gradient Boosting model pipeline for Qualifying prediction and a Random Forest model for Race Time prediction. Although, we achieved a lower R² score and acceptable MAE/RMSE figures for Qualifying Times through aggressive regularization, we managed to avoid having an overfitting model. The results for the Race Time prediction are also contrasted, although the R² score is slightly better. Overall, these predictions are just a shallow overview of the teams' and drivers' performances and won't have a real business impact for F1 stakeholders.
 
-Despite these strong results, predicting Formula 1 outcomes remains inherently challenging due to major unpredictable constraints:
+Indeed, predicting Formula 1 outcomes remains inherently challenging due to major unpredictable constraints:
 
 - Unforeseen Events: The models cannot account for non-deterministic events such as Safety Cars, Virtual Safety Cars, red flags, or unexpected mechanical failures, which dramatically alter race time and position.
 
